@@ -12,52 +12,51 @@ import static org.mockito.Mockito.*;
 public class EntityTest extends TestCase {
 	
 	float[] prices = {1,1,1};
-	float target = 3;
+	float target = 30;
 	
-	Entity a = new Entity(new int[] {1,1,1}, prices, target);
-	Entity b = new Entity(new int[] {2,2,2}, prices, target);
+	Entity a = new Entity(new int[] {8,8,8}, prices, target);
+	Entity b = new Entity(new int[] {12,12,12}, prices, target);
 	
 	public void testCompair(){
 		List<Entity> list = Arrays.asList(a,b);
 		
 		Collections.sort(list);
 		
-		assertTrue(Arrays.equals(list.get(1).items, new int[]{1,1,1}));
+		assertTrue(Arrays.equals(list.get(1).items, new int[]{8,8,8}));
 	}
 	
 	public void testFitness(){
-		assertTrue(a.fitness() == 3.0);
-		assertTrue(b.fitness() == -1.0);
+		assertTrue(a.fitness() == 24f);
+		assertTrue(b.fitness() == -1f);
 	}
 	
 	public void testMate(){
 		Random mockedRandom = mock(Random.class);
-		when(mockedRandom.nextBoolean()).thenReturn(true);
-		when(mockedRandom.nextInt(10)).thenReturn(0);
+		when(mockedRandom.nextFloat()).thenReturn(0.5f);
+		when(mockedRandom.nextInt(10)).thenReturn(9);
 		
 		Entity child = a.mate(b, mockedRandom);
 		
-		assertTrue(Arrays.equals(child.items, new int[]{1,1,1}));
+		assertTrue(Arrays.equals(child.items, new int[]{10,10,10}));
 	}
 	
 	public void testMate2(){
 		Random mockedRandom = mock(Random.class);
-		when(mockedRandom.nextBoolean()).thenReturn(false);
+		when(mockedRandom.nextFloat()).thenReturn(0.5f);
 		when(mockedRandom.nextInt(10)).thenReturn(0);
 		
 		Entity child = a.mate(b, mockedRandom);
 		
-		assertTrue(Arrays.equals(child.items, new int[]{2,2,2}));
+		assertTrue(Arrays.equals(child.items, new int[]{11,11,11}));
 	}
 	
 	public void testMate3(){
 		Random mockedRandom = mock(Random.class);
-		when(mockedRandom.nextBoolean()).thenReturn(true);
+		when(mockedRandom.nextFloat()).thenReturn(0.5f);
 		when(mockedRandom.nextInt(10)).thenReturn(1);
-		when(mockedRandom.nextInt(3)).thenReturn(0);
 		
 		Entity child = a.mate(b, mockedRandom);
 		
-		assertTrue(Arrays.equals(child.items, new int[]{0,0,0}));
+		assertTrue(Arrays.equals(child.items, new int[]{9,9,9}));
 	}
 }

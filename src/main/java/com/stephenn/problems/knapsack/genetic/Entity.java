@@ -45,13 +45,19 @@ public class Entity implements Comparable<Entity> {
 	public Entity mate(Entity other, Random rand){
 		int[] child = new int[this.items.length];
 		for(int i=0; i< this.items.length; i++){
-			if (rand.nextBoolean()){
-				child[i] = this.items[i];
-			} else {
-				child[i] = other.items[i];
-			}
-			if (rand.nextInt(10) == 1){
-				child[i] += (-1 + rand.nextInt(3)); // -1, 0, 1
+			// take a split proportion of the parents item[i]
+			float p = rand.nextFloat();
+			
+			child[i] = (int) ((this.items[i] * p) + (other.items[i] * (1f-p)));
+			
+			// mutate, a chance to add or remove 10%
+			switch(rand.nextInt(10)){
+				case 0:
+					child[i] += child[i] * 0.10;
+					break;
+				case 1:
+					child[i] -= child[i] * 0.10;
+					break;
 			}
 		}
 		
