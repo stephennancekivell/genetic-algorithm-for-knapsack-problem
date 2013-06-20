@@ -13,6 +13,14 @@ public class Entity implements Comparable<Entity> {
 		this.target = target;
 	}
 	
+	public static Entity newRand(float[] prices, float target, Random rand){
+		float[] items = new float[prices.length];
+		for (int i=0; i< items.length; i++){
+			items[i] = rand.nextFloat() * target;
+		}
+		return new Entity(items, prices, target);
+	}
+	
 	public float fitness(){
 		float cost = 0;
 		for (int i=0; i < items.length; i++){
