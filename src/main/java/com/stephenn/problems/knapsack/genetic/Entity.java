@@ -27,7 +27,7 @@ public class Entity implements Comparable<Entity> {
 	public float fitness(){
 		float cost = 0;
 		for (int i=0; i < items.length; i++){
-			cost += (prices[i] * items[i]);
+			cost += (items[i] * prices[i]);
 		}
 		
 		if (cost <= target){
@@ -39,7 +39,11 @@ public class Entity implements Comparable<Entity> {
 
 	@Override
 	public int compareTo(Entity other) {
-		return (int)(this.fitness() - other.fitness());
+		if (this.fitness() > other.fitness()){
+			return 1;
+		} else {
+			return -1;
+		}
 	}
 	
 	public Entity mate(Entity other, Random rand){

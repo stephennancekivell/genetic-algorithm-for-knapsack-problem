@@ -26,8 +26,8 @@ public class EntityTest extends TestCase {
 	}
 	
 	public void testFitness(){
-		assertTrue(a.fitness() == 24f);
-		assertTrue(b.fitness() == -1f);
+		assertEquals(a.fitness(), 24f);
+		assertEquals(b.fitness(), -1f);
 	}
 	
 	public void testMate(){

@@ -24,6 +24,7 @@ public class Tournament {
 	}
 	
 	public void display(){
+		
 		System.out.println("\t"+Arrays.toString(this.prices)+"\t"+this.target);
 		
 		for(int i=0; i< population.size(); i++){
