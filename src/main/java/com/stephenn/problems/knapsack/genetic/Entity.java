@@ -3,20 +3,23 @@ package com.stephenn.problems.knapsack.genetic;
 import java.util.*;
 
 public class Entity implements Comparable<Entity> {
-	float[] items;
+	int[] items;
 	float[] prices;
 	float target;
 	
-	public Entity(float[] items, float[] prices, float target){
+	public Entity(int[] items, float[] prices, float target){
 		this.items = items;
 		this.prices = prices;
 		this.target = target;
 	}
 	
 	public static Entity newRand(float[] prices, float target, Random rand){
-		float[] items = new float[prices.length];
+		int[] items = new int[prices.length];
+		float cost = target;
 		for (int i=0; i< items.length; i++){
-			items[i] = rand.nextFloat() * target;
+			float afford = cost / prices[i];
+			items[i] = (int)(rand.nextFloat() * afford);
+			cost -= items[i] * prices[i];
 		}
 		return new Entity(items, prices, target);
 	}
@@ -40,7 +43,7 @@ public class Entity implements Comparable<Entity> {
 	}
 	
 	public Entity mate(Entity other, Random rand){
-		float[] child = new float[this.items.length];
+		int[] child = new int[this.items.length];
 		for(int i=0; i< this.items.length; i++){
 			if (rand.nextBoolean()){
 				child[i] = this.items[i];

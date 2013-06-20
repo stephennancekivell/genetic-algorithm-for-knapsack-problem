@@ -20,6 +20,7 @@ public class Tournament {
 			population.add(Entity.newRand(prices, target, rand));
 		}
 		Collections.sort(population);
+		Collections.reverse(population);
 	}
 	
 	public void display(){
@@ -42,11 +43,12 @@ public class Tournament {
 			nextGen.add(population.get(i));
 		}
 		// mate ignoring the bottom 10%
-		for(int i=0; i < population.size() - tenPercent -1; i++){
+		for(int i=0; i < population.size() - tenPercent; i++){
 			nextGen.add(population.get(i).mate(population.get(i+1), rand));
 		}
 		
 		Collections.sort(nextGen);
+		Collections.reverse(nextGen);
 		this.population = nextGen;
 	}
 }

@@ -14,15 +14,15 @@ public class EntityTest extends TestCase {
 	float[] prices = {1,1,1};
 	float target = 3;
 	
-	Entity a = new Entity(new float[] {1,1,1}, prices, target);
-	Entity b = new Entity(new float[] {2,2,2}, prices, target);
+	Entity a = new Entity(new int[] {1,1,1}, prices, target);
+	Entity b = new Entity(new int[] {2,2,2}, prices, target);
 	
 	public void testCompair(){
 		List<Entity> list = Arrays.asList(a,b);
 		
 		Collections.sort(list);
 		
-		assertTrue(Arrays.equals(list.get(1).items, new float[]{1,1,1}));
+		assertTrue(Arrays.equals(list.get(1).items, new int[]{1,1,1}));
 	}
 	
 	public void testFitness(){
@@ -37,7 +37,7 @@ public class EntityTest extends TestCase {
 		
 		Entity child = a.mate(b, mockedRandom);
 		
-		assertTrue(Arrays.equals(child.items, new float[]{1,1,1}));
+		assertTrue(Arrays.equals(child.items, new int[]{1,1,1}));
 	}
 	
 	public void testMate2(){
@@ -47,7 +47,7 @@ public class EntityTest extends TestCase {
 		
 		Entity child = a.mate(b, mockedRandom);
 		
-		assertTrue(Arrays.equals(child.items, new float[]{2,2,2}));
+		assertTrue(Arrays.equals(child.items, new int[]{2,2,2}));
 	}
 	
 	public void testMate3(){
@@ -58,6 +58,6 @@ public class EntityTest extends TestCase {
 		
 		Entity child = a.mate(b, mockedRandom);
 		
-		assertTrue(Arrays.equals(child.items, new float[]{0,0,0}));
+		assertTrue(Arrays.equals(child.items, new int[]{0,0,0}));
 	}
 }
