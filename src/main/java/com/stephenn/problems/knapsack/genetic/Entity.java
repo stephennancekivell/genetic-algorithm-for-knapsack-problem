@@ -28,11 +28,10 @@ public class Entity implements Comparable<Entity> {
 
 	@Override
 	public int compareTo(Entity other) {
-		return (int) (this.fitness() - other.fitness());
+		return (int)(this.fitness() - other.fitness());
 	}
 	
-	public Entity bread(Entity other){
-		Random rand = new Random();
+	public Entity mate(Entity other, Random rand){
 		float[] child = new float[this.items.length];
 		for(int i=0; i< this.items.length; i++){
 			if (rand.nextBoolean()){
